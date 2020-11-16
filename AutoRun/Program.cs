@@ -13,25 +13,14 @@ namespace AutoRun
         /// Главная точка входа для приложения.
         /// </summary>
         /// 
-       static Form1 form;
+       
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            form = new Form1();
-            Application.Run(form);
+            Application.Run(new Form1());
         }
-       public static void timers()
-        {
-            TimerCallback tm = new TimerCallback(form.startJar);
-            // создаем таймер
-            System.Threading.Timer timer = new System.Threading.Timer(tm, null, 0, 1000*30*60);
-
-            TimerCallback tm2 = new TimerCallback(form.isStartDef);
-            // создаем таймер
-            System.Threading.Timer timer2 = new System.Threading.Timer(tm2, null, 30*1000, 1000*12*60*60);
-        }
-
+     
     }
 }
