@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AutoRun
@@ -24,10 +16,10 @@ namespace AutoRun
 
         private  void button_start_Click(object sender, EventArgs e)
         {
-            startJar(null);
+            startJar(null, null);
         }
 
-        public static void startJar(object y)
+        public static void startJar(object sender, EventArgs e)
         {
             if (!isStart)
             {
@@ -41,7 +33,7 @@ namespace AutoRun
             
         }
 
-        public static void isStartDef(object y)
+        public static void isStartDef(object sender, EventArgs e)
         {
             isStart = false;
 
@@ -52,15 +44,14 @@ namespace AutoRun
 
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Elapsed += new System.Timers.ElapsedEventHandler(startJar);
-            timer.Interval = 1000 * 60 * 60 * 24; // 24 Hours
+            timer.Interval = 1000 * 60 * 60 * 12; // 12 Hours
             timer.Start();
-            TimerCallback tm = new TimerCallback(startJar);
-            // создаем таймер
-            System.Threading.Timer timer = new System.Threading.Timer(tm, null, 0, 1000 * 30 * 60);
+           
+            System.Timers.Timer timer2 = new System.Timers.Timer();
+            timer2.Elapsed += new System.Timers.ElapsedEventHandler(isStartDef);
+            timer2.Interval = 1000 * 30 * 60; // 0.5 Hours
+            timer2.Start();
 
-            TimerCallback tm2 = new TimerCallback(isStartDef);
-            // создаем таймер
-            System.Threading.Timer timer2 = new System.Threading.Timer(tm2, null, 30 * 1000, 1000 * 12 * 60 * 60);
         }
 
 
