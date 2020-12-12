@@ -8,6 +8,7 @@ namespace AutoRun
     {
 
        static bool isStart = false;
+        static bool isStartGoogle = false;
         public Form1()
         {
             InitializeComponent();
@@ -33,9 +34,29 @@ namespace AutoRun
             
         }
 
+        public static void startJarGoogle(object sender, EventArgs e)
+        {
+            if (!isStart)
+            {
+                Process.Start(@"C:\parserGoogle\out\artifacts\parserGoogle_jar\parserGoogle.jar");
+                isStartGoogle = true;
+            }
+            else
+            {
+                MessageBox.Show("Не так быстро, будь нежнее. Попробуй через пол часа!");
+            }
+
+        }
+
         public static void isStartDef(object sender, EventArgs e)
         {
             isStart = false;
+
+        }
+
+        public static void isStartDefGoogle(object sender, EventArgs e)
+        {
+            isStartGoogle = false;
 
         }
 
@@ -52,9 +73,21 @@ namespace AutoRun
             timer2.Interval = 1000 * 30 * 60; // 0.5 Hours
             timer2.Start();
 
+            System.Timers.Timer timerGoogleStarts = new System.Timers.Timer();
+            timerGoogleStarts.Elapsed += new System.Timers.ElapsedEventHandler(isStartDefGoogle);
+            timerGoogleStarts.Interval = 1000 * 30 * 60; // 0.5 Hours
+            timerGoogleStarts.Start();
+
+            System.Timers.Timer timerGoogle = new System.Timers.Timer();
+            timerGoogle.Elapsed += new System.Timers.ElapsedEventHandler(startJar);
+            timerGoogle.Interval = 1000 * 60 * 60 * 12; // 12 Hours
+            timerGoogle.Start();
+
         }
 
-
-
+        private void button_start_scholar_Click(object sender, EventArgs e)
+        {
+            startJarGoogle(null, null);
+        }
     }
 }
