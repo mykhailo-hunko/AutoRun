@@ -79,7 +79,7 @@ namespace AutoRun
             timerGoogleStarts.Start();
 
             System.Timers.Timer timerGoogle = new System.Timers.Timer();
-            timerGoogle.Elapsed += new System.Timers.ElapsedEventHandler(startJar);
+            timerGoogle.Elapsed += new System.Timers.ElapsedEventHandler(startJarGoogle);
             timerGoogle.Interval = 1000 * 60 * 60 * 12; // 12 Hours
             timerGoogle.Start();
 
