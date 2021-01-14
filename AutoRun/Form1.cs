@@ -36,7 +36,7 @@ namespace AutoRun
 
         public static void startJarGoogle(object sender, EventArgs e)
         {
-            if (!isStart)
+            if (!isStartGoogle)
             {
                 Process.Start(@"C:\parserGoogle\out\artifacts\parserGoogle_jar\parserGoogle.jar");
                 isStartGoogle = true;
